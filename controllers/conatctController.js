@@ -31,13 +31,17 @@ export const addContact = async (req, res) => {
 // Function to get all contacts
 export const getAllContacts = async (req, res) => {
     try {
-        const contacts = await Contact.find();
-        // const count = await Contact.countDocuments();
-        res.json({contacts });
+      // Fetch all contacts from MongoDB
+      const contacts = await Contact.find();
+      
+      // Respond with the contacts data
+      res.status(200).json(contacts);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      // Handle errors
+      console.error('Error fetching contacts:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
-};
+  };
 
 // Function to update a contact
 export const updateContact = async(req, res)=> {
